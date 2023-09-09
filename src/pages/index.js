@@ -1,118 +1,162 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import BulletCard from '@/Components/BulletCard';
+import Link from 'next/link';
+import React, { useState } from 'react'
+const data = {
+  categories: [
+    { id: 1, name: "SSC Exams" },
+    { id: 2, name: "Banking Exams" },
+    { id: 3, name: "Teaching Exams" },
+    { id: 4, name: "Civil Exams" },
+    { id: 5, name: "Railway Exams" },
+    { id: 6, name: "Engineering Recruitment Exams" },
+    { id: 7, name: "Defence Exams" },
+  ],
+  cards: {
+    1: [
+      {id: 1, title: "SSC CGL" },
+      {id: 2, title: "SSC MTS" },
+      {id: 3, title: "SSSC CPO" },
+      {id: 4, title: "SSC CHSL" },
+      {id: 5, title: "DELHI POLICE CONSTABLE" },
+      {id: 6, title: "SSC GD CONSTABLE" },
+      {id: 7, title: "SSC STENOGRAPHER" },
+      {id: 8, title: "SSC JE CE" },
+      {id: 9, title: "SSC JE ME" },
+      {id: 10, title: "SSC JE EE" },
+      {id: 11, title: "SSC SELECTION POST" },
+      { id: 12,title: "EXPLORE ALL EXAMS" },
+    ],
+    2: [
+      {id: 1, title: "IBPS CLERK" },
+      {id: 2, title: "IBPS PO" },
+      {id: 3, title: "RRP OFFICER SCAL - 1" },
+      { id: 4,title: "SBI CLERK" },
+      {id: 5, title: "RRB OFFICE ASSISTANT" },
+      { id: 6,title: "SBI PO" },
+      {id: 7, title: "CENTRAL BANK OF INDIA MANAGER" },
+      {id: 8, title: "BANK OF INDIA PO" },
+      {id: 9, title: "JAIIB EXAM" },
+      {id: 10, title: "BOB ACQUSITION OFFICER" },
+      {id: 11, title: "EPFO STENOGRAPHER" },
+      {id: 12, title: "EXPLORE ALL EXAMS" },
+    ],
+    3: [
+      {id: 1, title: "UGC NET" },
+      {id: 2, title: "BIHAR STET" },
+      {id: 3, title: "EMRS HOSTEL WARDEN" },
+      {id: 4, title: "JSSC PRIMARY TEACHER" },
+      {id: 5, title: "DSSSB TGT" },
+      {id: 6, title: "EMRS LIBRARIAN" },
+      {id: 7, title: "EMRS ACCOUNTANT" },
+      {id: 8, title: "CTET" },
+      {id: 9, title: "BIHAR PRIMARY TECHER" },
+      {id: 10, title: "EMRS TGT" },
+      {id: 11, title: "EMRS PGT" },
+      {id: 12, title: "EXPLORE ALL EXAMS" },
+    ],
+    4: [
+      {id: 1, title: "UGC NET" },
+      {id: 2, title: "BIHAR STET" },
+      {id: 3, title: "EMRS HOSTEL WARDEN" },
+      {id: 4, title: "JSSC PRIMARY TEACHER" },
+      {id: 5, title: "DSSSB TGT" },
+      {id: 6, title: "EMRS LIBRARIAN" },
+      {id: 7, title: "EMRS ACCOUNTANT" },
+      {id: 8, title: "CTET" },
+      {id: 9, title: "BIHAR PRIMARY TECHER" },
+      {id: 10, title: "EMRS TGT" },
+      {id: 11, title: "EMRS PGT" },
+      {id: 12, title: "EXPLORE ALL EXAMS" },
+    ],
+    5: [
+      {id: 1, title: "UGC NET" },
+      {id: 2, title: "BIHAR STET" },
+      {id: 3, title: "EMRS HOSTEL WARDEN" },
+      {id: 4, title: "JSSC PRIMARY TEACHER" },
+      {id: 5, title: "DSSSB TGT" },
+      {id: 6, title: "EMRS LIBRARIAN" },
+      {id: 7, title: "EMRS ACCOUNTANT" },
+      {id: 8, title: "CTET" },
+      {id: 9, title: "BIHAR PRIMARY TECHER" },
+      {id: 10, title: "EMRS TGT" },
+      {id: 11, title: "EMRS PGT" },
+      {id: 12, title: "EXPLORE ALL EXAMS" },
+    ],
+    6: [
+      {id: 1, title: "UGC NET" },
+      {id: 2, title: "BIHAR STET" },
+      {id: 3, title: "EMRS HOSTEL WARDEN" },
+      {id: 4, title: "JSSC PRIMARY TEACHER" },
+      {id: 5, title: "DSSSB TGT" },
+      {id: 6, title: "EMRS LIBRARIAN" },
+      {id: 7, title: "EMRS ACCOUNTANT" },
+      {id: 8, title: "CTET" },
+      {id: 9, title: "BIHAR PRIMARY TECHER" },
+      {id: 10, title: "EMRS TGT" },
+      {id: 11, title: "EMRS PGT" },
+      {id: 12, title: "EXPLORE ALL EXAMS" },
+    ],
+    7: [
+      {id: 1, title: "UGC NET" },
+      {id: 2, title: "BIHAR STET" },
+      {id: 3, title: "EMRS HOSTEL WARDEN" },
+      {id: 4, title: "JSSC PRIMARY TEACHER" },
+      {id: 5, title: "DSSSB TGT" },
+      {id: 6, title: "EMRS LIBRARIAN" },
+      {id: 7, title: "EMRS ACCOUNTANT" },
+      {id: 8, title: "CTET" },
+      {id: 9, title: "BIHAR PRIMARY TECHER" },
+      {id: 10, title: "EMRS TGT" },
+      {id: 11, title: "EMRS PGT" },
+      {id: 12, title: "EXPLORE ALL EXAMS" },
+    ],
+  },
+};
+const Home = () => {
+  const [activeCategory, setActiveCategory] = useState(data.categories[0].id);
 
-const inter = Inter({ subsets: ['latin'] })
+  const activeCards = data.cards[activeCategory] || [];
 
-export default function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="container mx-auto py-4">
+      <div className="w-full h-[100px]">
+        
+      </div>
+      <ul
+        className="mb-5 flex w-full justify-between list-none flex-row flex-wrap border-b-2 pl-0"
+        role="tablist"
+      >
+        {data.categories.map((category) => (
+          <li
+            role="presentation"
+            key={category.id}
+            className={` my-2 block border-b-2  px-2 pb-3.5 pt-4 font-medium uppercase leading-tight text-sm hover:bg-gray-100  focus:bg-gray-100 ${
+              activeCategory === category.id
+                ? "border-blue-400  bg-slate-100"
+                : "border-none"
+            }`}
+            onClick={() => setActiveCategory(category.id)}
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+            <Link href="#tabs-home" className="">
+              {category.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-4 w-full flex flex-wrap gap-3 justify-between  items-center ">
+        {activeCards &&
+          activeCards.map((activeCard, index) => (
+            <BulletCard
+              key={index}
+              title={activeCard.title}
+              activeCategoryName={data.categories[activeCategory-1].name}
+              image={`/hero.png`}
             />
-          </a>
-        </div>
+          ))}
       </div>
+    </div>
+  );
+};
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+export default Home
