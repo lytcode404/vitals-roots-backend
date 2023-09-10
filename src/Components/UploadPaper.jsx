@@ -16,7 +16,7 @@ export default function UploadPaper({selectedValue,activeCategoryName,categoryTi
   const [questions, setQuestions] = useState([
     {
       diseaseName: "",
-      remedyIngredients: {},
+      remedyIngredients: [],
       dosage: "",
       symptoms: "",
     },
@@ -34,7 +34,7 @@ export default function UploadPaper({selectedValue,activeCategoryName,categoryTi
     ...questions,
     {
       diseaseName: "",
-      remedyIngredients: {},
+      remedyIngredients: [],
       dosage: "",
       symptoms: "",
     },
@@ -75,21 +75,6 @@ export default function UploadPaper({selectedValue,activeCategoryName,categoryTi
   };
 
 
-
-  //   try {
-  //     await setDoc(doc(db, diseaseCategory, ), {
-  //       test: questions,
-  //     });
-
-  //     alert("Test uploaded successfully!");
-  //     setDiseaseCategory("");
-  //     setQuestions([]);
-  //   } catch (error) {
-  //     console.error("Error uploading test:", error);
-  //     alert("An error occurred while uploading the test.");
-  //   }
-  // };
-
   return (
     <div className="min-h-screen bg-gray-100 p-8 grid grid-cols-[5fr,1fr] gap-4">
       {/* Left Column */}
@@ -127,11 +112,11 @@ export default function UploadPaper({selectedValue,activeCategoryName,categoryTi
         </div>
       </Scrollbars>
       {/* Sidebar Navigation */}
-      <Sidebar
+      {/* <Sidebar
         questions={questions}
         activeIndex={activeIndex}
         onNavigate={navigateToQuestion}
-      />
+      /> */}
     </div>
   );
 }

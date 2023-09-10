@@ -34,13 +34,13 @@ const Question = ({
 
   const addRemedyIngredient = (index) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[index].remedyIngredients[`ingredient${Object.keys(updatedQuestions[index].remedyIngredients).length + 1}`] = "";
+    updatedQuestions[index].remedyIngredients.push("");
     setQuestions(updatedQuestions);
   };
 
-  const deleteRemedyIngredient = (questionIndex, ingredientKey) => {
+  const deleteRemedyIngredient = (questionIndex, ingredientIndex) => {
     const updatedQuestions = [...questions];
-    delete updatedQuestions[questionIndex].remedyIngredients[ingredientKey];
+    updatedQuestions[questionIndex].remedyIngredients.splice(ingredientIndex, 1);
     setQuestions(updatedQuestions);
   };
 
@@ -68,23 +68,22 @@ const Question = ({
         onChange={(e) => updateQuestion(index, "diseaseName", e.target.value)}
       />
 
-      {Object.keys(q.remedyIngredients).map((ingredientKey) => (
-        <div key={ingredientKey} className="flex items-center mb-2">
+      {q.remedyIngredients.map((ingredient, ingredientIndex) => (
+        <div key={ingredientIndex} className="flex items-center mb-2">
           <input
             type="text"
             className="border rounded w-full px-2 py-1 mr-2"
-            placeholder={`Ingredient ${ingredientKey}`}
-            value={q.remedyIngredients[ingredientKey]}
-            onChange={(e) =>
-              updateQuestion(index, "remedyIngredients", {
-                ...q.remedyIngredients,
-                [ingredientKey]: e.target.value,
-              })
-            }
+            placeholder={`Ingredient ${ingredientIndex + 1}`}
+            value={ingredient}
+            onChange={(e) => {
+              const updatedIngredients = [...q.remedyIngredients];
+              updatedIngredients[ingredientIndex] = e.target.value;
+              updateQuestion(index, "remedyIngredients", updatedIngredients);
+            }}
           />
           <button
             className="bg-red-500 text-white py-1 px-2 rounded"
-            onClick={() => deleteRemedyIngredient(index, ingredientKey)}
+            onClick={() => deleteRemedyIngredient(index, ingredient)}
           >
             Remove
           </button>
