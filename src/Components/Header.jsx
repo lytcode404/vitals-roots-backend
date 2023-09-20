@@ -33,7 +33,7 @@ const Header = ({photoUrl, sideNavActive, setSideNavActive}) => {
   return (
     <header className="fixed z-10 w-full container mx-auto py-4 bg-white shadow-md">
       <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
-        <div className="text-xl">Testhouse</div>
+        <div className="text-xl">vital roots backend</div>
         {/* <!-- Mobile hamburger --> */}
         <button
           className="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
@@ -73,7 +73,7 @@ const Header = ({photoUrl, sideNavActive, setSideNavActive}) => {
             <input
               className="w-full h-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
               type="text"
-              placeholder="Search for Test seies or Tests"
+              placeholder="Search for Diseases and remedy Ingredients"
               aria-label="Search"
             />
           </div>

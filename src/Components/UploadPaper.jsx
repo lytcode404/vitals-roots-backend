@@ -79,7 +79,7 @@ export default function UploadPaper({selectedValue,activeCategoryName,categoryTi
     <div className="min-h-screen bg-gray-100 p-8 grid grid-cols-[5fr,1fr] gap-4">
       {/* Left Column */}
       <Scrollbars style={{ height: "calc(100vh - 64px)" }}>
-        <h1 className="text-2xl font-semibold mb-4">Questionnaire</h1>
+        <h1 className="text-2xl font-semibold mb-4">Questionnaire of Diseases</h1>
         {questions.map((q, index) => (
           <Question key={index} q={q} index={index} setQuestions={setQuestions} questions={questions} />
         ))}
@@ -92,14 +92,14 @@ export default function UploadPaper({selectedValue,activeCategoryName,categoryTi
 
         <div className="my-4">
             
-          <h2 className="text-xl font-semibold mb-2">Create Test</h2>
+          <h2 className="text-xl font-semibold mb-2">Create Disease Entry</h2>
           {/* <p><span className="text-red-400">Warning:</span>the test will be uploaded in :</p>
           {"/ "}{selectedValue}{"/ "} */}
           
           <input
             className="border rounded px-2 py-1 mr-2"
             type="text"
-            placeholder="Test Name"
+            placeholder="category Name"
             value={diseaseCategory}
             onChange={handleTestNameChange}
           />
@@ -107,7 +107,7 @@ export default function UploadPaper({selectedValue,activeCategoryName,categoryTi
             className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600"
             onClick={handleUploadTest}
           >
-            Upload Test
+            Upload Disease
           </button>
         </div>
       </Scrollbars>
